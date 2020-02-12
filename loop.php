@@ -18,13 +18,13 @@
                 <?php if (!is_page()) { ?>
                 <div class="post-meta">
                     <span class="posted-calendar">
-                        <i class="fa fa-calendar"></i> <a href="#"><time class="post-date"><?php the_time(get_option('date_format')); ?></time></a>&nbsp;
+                        <a href="#"><i class="fa fa-calendar"></i></a> <a href="#"><time class="post-date"><?php the_time(get_option('date_format')); ?></time></a>&nbsp;
                     </span>
                     <span class="article-categories">
-                        <i class="fa fa-archive"></i> <?php the_category(', '); ?>
+                        <a href="#"><i class="fa fa-archive"></i></a> <?php the_category(', '); ?>
                     </span>
                     <span class="article-tags">
-                        <?php the_tags(' <i class="fa fa-tag"></i> ', ', '); ?>
+                        <?php the_tags(' <a href="#"><i class="fa fa-tag"></i></a> ', ', '); ?>
                     </span>
                     <!--span class="comments-link">
                         <?php if (comments_open( get_the_ID() ) ): ?><a href="#"><i class="fa fa-comment"></i></a> <?php comments_popup_link( __( 'Lascia un commento', 'templated_spatial' ), __( 'Un commento', 'templated_spatial' ), __( '% commenti', 'templated_spatial' )); endif; ?>

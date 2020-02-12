@@ -7,21 +7,37 @@ register_nav_menus(['primary' => 'Menu principale',
 add_action('wp_enqueue_scripts', 'template_assets');
 // Registro le aree widget
 add_action('widgets_init', 'template_widgets');
+// Registro impostazioni tema
+add_action('customize_register', 'customize_register');
+// Inizializzo i custom post
+add_action('init', 'features_custom_post');
+// Funzioni tema
+add_theme_support('post-thumbnails');
 
 function template_assets() {
 	// Stili
-	// wp_enqueue_style('animate', get_template_directory_uri() . '/css/animate.min.css');
 	wp_enqueue_style('main', get_stylesheet_uri());
+	// Custom CSS
+	$banner_overlay = get_theme_mod('section_banner_background_overlay') ? 'url("' . get_template_directory_uri() . '/images/overlay.png"), ' : '';
+	$banner_cta = get_theme_mod('section_call_to_action_background_overlay') ? 'url("' . get_template_directory_uri() . '/images/overlay.png"), ' : '';
+	$custom_css = '#banner { 
+		background-image: ' . $banner_overlay . 'url("' . get_theme_mod('section_banner_background') . '");
+	}
+	.wrapper.style3 { 
+		background-image: ' . $banner_cta . 'url("' . get_theme_mod('section_call_to_action_background') . '");
+	}';
+	wp_add_inline_style('main', $custom_css);
+
 	// Script
 	wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', [], false, true);
 	wp_enqueue_script('skel', get_template_directory_uri() . '/assets/js/skel.min.js', [], false, true);
 	wp_enqueue_script('util', get_template_directory_uri() . '/assets/js/util.js', [], false, true);
-	wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.js', [], false, true);
+	wp_enqueue_script('main_js', get_template_directory_uri() . '/assets/js/main.js', [], false, true);
 }
 function template_widgets() {
 	register_sidebar([
-		'name'          => 'Widget',
-		'id'            => 'widget',
+		'name'          => 'Homepage widget',
+		'id'            => 'homepage_widget',
 		'before_widget' => '<div class="widget">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h2>',
@@ -29,13 +45,8 @@ function template_widgets() {
 	]);
 }
 
-class Social_Nav_Walker extends Walker_Nav_Menu {
-	// Displays start of an element. E.g '<li> Item Name'
-    // @see Walker::start_el()
-    function start_el(&$output, $item, $depth = 0, $args = [], $id = 0) {
-		if (isset($item->classes))
-			$output .= '<li class="' . implode(' ', array_slice($item->classes, 1)) . '"><a href="' . $item->url . '" class="icon ' .  $item->classes[0] . '" title="' . $item->title . '">'
-				. $item->description . '</a>';
-    }
-}
+// Includo altre funzioni
+include_once "inc/cutomize_register.inc.php";
+include_once "inc/custom_post.inc.php";
+include_once "inc/utilities.inc.php";
 ?>

@@ -1,8 +1,9 @@
+<?php $home_menu = is_home() && get_theme_mod('show_section_banner', false); ?>
 <!DOCTYPE HTML>
 <html>
-	<head>        
+	<head>
         <meta charset="<?php bloginfo('charset'); ?>">
-        <title><?php wp_title(); ?></title>
+        <title><?php bloginfo('title'); wp_title(); ?></title>
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,11 @@
         
         <?php wp_head(); ?>
 	</head>
-	<body>
+	<body <?= $home_menu ? ' class="landing"' : '' ?>>
 
 		<!-- Header -->
-			<header id="header">
-				<h1><strong><a href="/"><?php echo get_bloginfo('name'); ?></a></strong> <?php echo get_bloginfo('description'); ?></h1>
+			<header id="header"<?= $home_menu ? ' class="alt"' : '' ?>>
+				<h1><strong><a href="/"><?php bloginfo('name'); ?></a></strong> <?php bloginfo('description'); ?></h1>
 				<nav id="nav">
                     <?php
                         wp_nav_menu(array(
