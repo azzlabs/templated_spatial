@@ -55,7 +55,7 @@ function customize_register($wp_customize) {
 	$wp_customize->add_control('show_section_banner', array(
 		'label'             => __('Mostra sezione banner', 'templated_spatial'),
 		'type'				=> 'checkbox',
-		'section'           => 'sezione_home_others'
+		'section'           => 'section_banner'
 	));
 	$wp_customize->add_control('section_banner_title', array(
 		'label'             => __('Titolo sezione', 'templated_spatial'),
@@ -90,6 +90,7 @@ function customize_register($wp_customize) {
 	// -- Sezione features
 	$wp_customize->add_control('show_section_features', array(
 		'label'             => __('Mostra la sezione features', 'templated_spatial'),
+		'description'		=> __('&Egrave; possibile aggiungere le features tramite il custom post "features"', 'templated_spatial'),
 		'type'				=> 'checkbox',
 		'section'           => 'section_features'
 	));
@@ -143,7 +144,7 @@ function customize_register($wp_customize) {
 	// -- Sezione content
 	$wp_customize->add_control('show_section_content', array(
 		'label'             => __('Mostra sezione contenuto', 'templated_spatial'),
-		'description'		=> __('Mostra il contenuto della homepage (statica o articoli)', 'templated_spatial'),
+		'description'		=> __('Mostra il contenuto della homepage (se selezionato tipo "con articoli")', 'templated_spatial'),
 		'type'				=> 'checkbox',
 		'section'           => 'sezione_home_others'
 	));
